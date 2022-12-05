@@ -35,61 +35,11 @@
                                                 $Status = $_GET['status'];
                                                 $product = "SELECT product.*, category.Cate_Name AS Cname FROM product,category WHERE category.ID = product.Category_ID AND product.Pro_Name = '$Name' AND category.Cate_Name = '$Cate' AND product.Pro_Status = '$Status'";
                                                 $product_run = mysqli_query($dataconnection,$product);
-                                                if(mysqli_num_rows($product_run) > 0)
-                                                {
-                                                    foreach($product_run as $items)
-                                                    {
-                                                        ?>
-                                                        <tr>
-                                                            <td><?php echo $items['Pro_Name'];?></td>
-                                                            <td><?php echo $items['Cname'];?></td>
-                                                            <td>RM <?php echo $items['Pro_Price'];?></td>
-                                                            <td><image src = "../Admin/uploads/products/<?php echo $items['Pro_Image'];?>" width = "100px" height = "150px" /></td>
-                                                            <td><?php echo $items['Pro_Status'] == '1'? "Enable":"Disable" ?></td>
-                                                            <td><a href="editproduct.php?id=<?php echo $items['ID'];?>" class="btn btn-primary">Edit</a>
-                                                            <form action="productcode.php" method="POST">
-                                                                <input type="hidden" name="product_id" value="<?php echo $items['ID']?>"></input>
-                                                                <button type="submit" name="deleteproductbtn" onclick="return confirm('Are you sure?');" class="btn btn-danger">Delete</button>
-                                                            </form>
-                                                            </td>
-                                                        </tr>
-                                                        <?php
-                                                    }
-                                                }
-                                                else
-                                                {
-                                                    echo "No Product Available";
-                                                }
                                             }
                                             else
                                             {
                                                 $product = "SELECT product.*, category.Cate_Name AS Cname FROM product,category WHERE category.ID = product.Category_ID AND product.Pro_Name = '$Name' AND category.Cate_Name = '$Cate'";
                                                 $product_run = mysqli_query($dataconnection,$product);
-                                                if(mysqli_num_rows($product_run) > 0)
-                                                {
-                                                    foreach($product_run as $items)
-                                                    {
-                                                        ?>
-                                                        <tr>
-                                                            <td><?php echo $items['Pro_Name'];?></td>
-                                                            <td><?php echo $items['Cname'];?></td>
-                                                            <td>RM <?php echo $items['Pro_Price'];?></td>
-                                                            <td><image src = "../Admin/uploads/products/<?php echo $items['Pro_Image'];?>" width = "100px" height = "150px" /></td>
-                                                            <td><?php echo $items['Pro_Status'] == '1'? "Enable":"Disable" ?></td>
-                                                            <td><a href="editproduct.php?id=<?php echo $items['ID'];?>" class="btn btn-primary">Edit</a>
-                                                            <form action="productcode.php" method="POST">
-                                                                <input type="hidden" name="product_id" value="<?php echo $items['ID']?>"></input>
-                                                                <button type="submit" name="deleteproductbtn" onclick="return confirm('Are you sure?');" class="btn btn-danger">Delete</button>
-                                                            </form>
-                                                            </td>
-                                                        </tr>
-                                                        <?php
-                                                    }
-                                                }
-                                                else
-                                                {
-                                                    echo "No Product Available";
-                                                }
                                             }
                                         }
                                         else if(isset($_GET['status']))
@@ -97,61 +47,11 @@
                                                 $Status = $_GET['status'];
                                                 $product = "SELECT product.*, category.Cate_Name AS Cname FROM product,category WHERE category.ID = product.Category_ID AND product.Pro_Name = '$Name' AND product.Pro_Status = '$Status'";
                                                 $product_run = mysqli_query($dataconnection,$product);
-                                                if(mysqli_num_rows($product_run) > 0)
-                                                {
-                                                    foreach($product_run as $items)
-                                                    {
-                                                        ?>
-                                                        <tr>
-                                                            <td><?php echo $items['Pro_Name'];?></td>
-                                                            <td><?php echo $items['Cname'];?></td>
-                                                            <td>RM <?php echo $items['Pro_Price'];?></td>
-                                                            <td><image src = "../Admin/uploads/products/<?php echo $items['Pro_Image'];?>" width = "100px" height = "150px" /></td>
-                                                            <td><?php echo $items['Pro_Status'] == '1'? "Enable":"Disable" ?></td>
-                                                            <td><a href="editproduct.php?id=<?php echo $items['ID'];?>" class="btn btn-primary">Edit</a>
-                                                            <form action="productcode.php" method="POST">
-                                                                <input type="hidden" name="product_id" value="<?php echo $items['ID']?>"></input>
-                                                                <button type="submit" name="deleteproductbtn" onclick="return confirm('Are you sure?');" class="btn btn-danger">Delete</button>
-                                                            </form>
-                                                            </td>
-                                                        </tr>
-                                                        <?php
-                                                    }
-                                                }
-                                                else
-                                                {
-                                                    echo "No Product Available";
-                                                }
                                         }
                                         else
                                         {
                                                 $product = "SELECT product.*, category.Cate_Name AS Cname FROM product,category WHERE category.ID = product.Category_ID AND product.Pro_Name = '$Name'";
                                                 $product_run = mysqli_query($dataconnection,$product);
-                                                if(mysqli_num_rows($product_run) > 0)
-                                                {
-                                                    foreach($product_run as $items)
-                                                    {
-                                                        ?>
-                                                        <tr>
-                                                            <td><?php echo $items['Pro_Name'];?></td>
-                                                            <td><?php echo $items['Cname'];?></td>
-                                                            <td>RM <?php echo $items['Pro_Price'];?></td>
-                                                            <td><image src = "../Admin/uploads/products/<?php echo $items['Pro_Image'];?>" width = "100px" height = "150px" /></td>
-                                                            <td><?php echo $items['Pro_Status'] == '1'? "Enable":"Disable" ?></td>
-                                                            <td><a href="editproduct.php?id=<?php echo $items['ID'];?>" class="btn btn-primary">Edit</a>
-                                                            <form action="productcode.php" method="POST">
-                                                                <input type="hidden" name="product_id" value="<?php echo $items['ID']?>"></input>
-                                                                <button type="submit" name="deleteproductbtn" onclick="return confirm('Are you sure?');" class="btn btn-danger">Delete</button>
-                                                            </form>
-                                                            </td>
-                                                        </tr>
-                                                        <?php
-                                                    }
-                                                }
-                                                else
-                                                {
-                                                    echo "No Product Available";
-                                                }
                                         }
                                     }
                                     else
@@ -164,61 +64,11 @@
                                                 $Status = $_GET['status'];
                                                 $product = "SELECT product.*, category.Cate_Name AS Cname FROM product,category WHERE category.ID = product.Category_ID AND category.Cate_Name = '$Cate' AND product.Pro_Status = '$Status'";
                                                 $product_run = mysqli_query($dataconnection,$product);
-                                                if(mysqli_num_rows($product_run) > 0)
-                                                {
-                                                    foreach($product_run as $items)
-                                                    {
-                                                        ?>
-                                                        <tr>
-                                                            <td><?php echo $items['Pro_Name'];?></td>
-                                                            <td><?php echo $items['Cname'];?></td>
-                                                            <td>RM <?php echo $items['Pro_Price'];?></td>
-                                                            <td><image src = "../Admin/uploads/products/<?php echo $items['Pro_Image'];?>" width = "100px" height = "150px" /></td>
-                                                            <td><?php echo $items['Pro_Status'] == '1'? "Enable":"Disable" ?></td>
-                                                            <td><a href="editproduct.php?id=<?php echo $items['ID'];?>" class="btn btn-primary">Edit</a>
-                                                            <form action="productcode.php" method="POST">
-                                                                <input type="hidden" name="product_id" value="<?php echo $items['ID']?>"></input>
-                                                                <button type="submit" name="deleteproductbtn" onclick="return confirm('Are you sure?');" class="btn btn-danger">Delete</button>
-                                                            </form>
-                                                            </td>
-                                                        </tr>
-                                                        <?php
-                                                    }
-                                                }
-                                                else
-                                                {
-                                                    echo "No Product Available";
-                                                }
                                             }
                                             else
                                             {
                                                 $product = "SELECT product.*, category.Cate_Name AS Cname FROM product,category WHERE category.ID = product.Category_ID AND category.Cate_Name = '$Cate'";
                                                 $product_run = mysqli_query($dataconnection,$product);
-                                                if(mysqli_num_rows($product_run) > 0)
-                                                {
-                                                    foreach($product_run as $items)
-                                                    {
-                                                        ?>
-                                                        <tr>
-                                                            <td><?php echo $items['Pro_Name'];?></td>
-                                                            <td><?php echo $items['Cname'];?></td>
-                                                            <td>RM <?php echo $items['Pro_Price'];?></td>
-                                                            <td><image src = "../Admin/uploads/products/<?php echo $items['Pro_Image'];?>" width = "100px" height = "150px" /></td>
-                                                            <td><?php echo $items['Pro_Status'] == '1'? "Enable":"Disable" ?></td>
-                                                            <td><a href="editproduct.php?id=<?php echo $items['ID'];?>" class="btn btn-primary">Edit</a>
-                                                            <form action="productcode.php" method="POST">
-                                                                <input type="hidden" name="product_id" value="<?php echo $items['ID']?>"></input>
-                                                                <button type="submit" name="deleteproductbtn" onclick="return confirm('Are you sure?');" class="btn btn-danger">Delete</button>
-                                                            </form>
-                                                            </td>
-                                                        </tr>
-                                                        <?php
-                                                    }
-                                                }
-                                                else
-                                                {
-                                                    echo "No Product Available";
-                                                }
                                             }
                                         }
                                         else if(isset($_GET['status']))
@@ -226,38 +76,16 @@
                                                 $Status = $_GET['status'];
                                                 $product = "SELECT product.*, category.Cate_Name AS Cname FROM product,category WHERE category.ID = product.Category_ID AND product.Pro_Status = '$Status'";
                                                 $product_run = mysqli_query($dataconnection,$product);
-                                                if(mysqli_num_rows($product_run) > 0)
-                                                {
-                                                    foreach($product_run as $items)
-                                                    {
-                                                        ?>
-                                                        <tr>
-                                                            <td><?php echo $items['Pro_Name'];?></td>
-                                                            <td><?php echo $items['Cname'];?></td>
-                                                            <td>RM <?php echo $items['Pro_Price'];?></td>
-                                                            <td><image src = "../Admin/uploads/products/<?php echo $items['Pro_Image'];?>" width = "100px" height = "150px" /></td>
-                                                            <td><?php echo $items['Pro_Status'] == '1'? "Enable":"Disable" ?></td>
-                                                            <td><a href="editproduct.php?id=<?php echo $items['ID'];?>" class="btn btn-primary">Edit</a>
-                                                            <form action="productcode.php" method="POST">
-                                                                <input type="hidden" name="product_id" value="<?php echo $items['ID']?>"></input>
-                                                                <button type="submit" name="deleteproductbtn" onclick="return confirm('Are you sure?');" class="btn btn-danger">Delete</button>
-                                                            </form>
-                                                            </td>
-                                                        </tr>
-                                                        <?php
-                                                    }
-                                                }
-                                                else
-                                                {
-                                                    echo "No Product Available";
-                                                }
                                         }
                                         else 
                                         {
                                             $product = "SELECT product.*, category.Cate_Name AS Cname FROM product,category WHERE category.ID = product.Category_ID";
                                             $product_run = mysqli_query($dataconnection,$product);
-                                            if(mysqli_num_rows($product_run) > 0)
-                                            {
+                                            
+                                        }
+                                    }
+                                    if(mysqli_num_rows($product_run) > 0)
+                                    {
                                                 foreach($product_run as $items)
                                                 {
                                                     ?>
@@ -276,14 +104,11 @@
                                                     </tr>
                                                     <?php
                                                 }
-                                            }
-                                            else
-                                            {
-                                                echo "No Product Available";
-                                            }
-                                        }
                                     }
-                                    
+                                    else
+                                    {
+                                                echo "No Product Available";
+                                    }
                                 ?>
                             <div class="float-end">
                                 <?php
