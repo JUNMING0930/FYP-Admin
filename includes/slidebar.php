@@ -26,10 +26,21 @@
     <a class="nav-link text-white " href="admin.php?id=<?php echo $_SESSION['ID'] ?>">
     
       <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-      <i class="material-icons opacity-10">groups</i>
+      <i class="material-icons opacity-10">supervisor_account</i>
       </div>
     
     <span class="nav-link-text ms-1">Admin</span>
+    </a>
+    </li>
+
+    <li class="nav-item">
+    <a class="nav-link text-white " href="customer.php?id=<?php echo $_SESSION['ID'] ?>">
+    
+      <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+      <i class="material-icons opacity-10">groups</i>
+      </div>
+    
+    <span class="nav-link-text ms-1">Customer</span>
     </a>
     </li>
 
