@@ -1,368 +1,140 @@
-<?php $page_title = "Welcome"?>
-<?php include('includes/header.php')?>
+<!DOCTYPE html>
+<html lang="en">
 
-<div class="row">
-  <div class="col-lg-7 position-relative z-index-2">
-    <div class="card card-plain mb-4">
-      <div class="card-body p-3">
-        <div class="row">
-          <div class="col-lg-6">
-            <div class="d-flex flex-column h-100">
-  <h2 class="font-weight-bolder mb-0">General Statistics</h2>
-</div>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>KNM SHOES</title>
+  <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.min.css' />
+  <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.9.0/css/all.min.css' />
+</head>
 
-          </div>
-        </div>
-      </div>
+<body>
+  <!-- Navbar start -->
+  <nav class="navbar navbar-expand-md bg-dark navbar-dark">
+    <a class="navbar-brand" href="index.php"><i class="fas fa-shoe-prints"></i>&nbsp;&nbsp;KNM SHOES</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="collapsibleNavbar">
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item">
+          <a class="nav-link active" href="index.php"><i class="fas fa-mobile-alt mr-2"></i>Products</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#"><i class="fas fa-th-list mr-2"></i>Categories</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="checkout.php"><i class="fas fa-money-check-alt mr-2"></i>Checkout</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="cart.php"><i class="fas fa-shopping-cart"></i> <span id="cart-item" class="badge badge-danger"></span></a>
+        </li>
+      </ul>
     </div>
+  </nav>
+  <!-- Navbar end -->
 
-    <div class="row">
-      <div class="col-lg-5 col-sm-5">
-        <div class="card  mb-2">
-  <div class="card-header p-3 pt-2">
-    <div class="icon icon-lg icon-shape bg-gradient-dark shadow-dark shadow text-center border-radius-xl mt-n4 position-absolute">
-      <i class="material-icons opacity-10">category</i>
-    </div>
-
-    <div class="text-end pt-1">
-      <p class="text-sm mb-0 text-capitalize">Categories</p>
+  <!-- Displaying Products Start -->
+  <div class="container">
+    <div id="message"></div>
+    <div class="row mt-2 pb-3">
       <?php
-        $Cate = getalldata("category");
-        if($Total_Cate_Row = mysqli_num_rows($Cate))
-        {
-          ?>
-          <h4 class="mb-0"><?php echo $Total_Cate_Row ?></h4>
-          <?php
-        }
-        else
-        {
-          echo "error";
-        }
-      ?>
-    </div>
-  </div>
+  			include 'config.php';
+  			$stmt = $conn->prepare('SELECT * FROM product');
+  			$stmt->execute();
+  			$result = $stmt->get_result();
+  			while ($row = $result->fetch_assoc()):
+  		?>
+      <div class="col-sm-6 col-md-4 col-lg-3 mb-2">
+        <div class="card-deck">
+          <div class="card p-2 border-secondary mb-2">
+            <img src="<?= $row['product_image'] ?>" class="card-img-top" height="250">
+            <div class="card-body p-1">
+              <h4 class="card-title text-center text-info"><?= $row['product_name'] ?></h4>
+              <h5 class="card-text text-center text-danger">RM</i>&nbsp;&nbsp;<?= number_format($row['product_price'],2) ?></h5>
 
-  <hr class="dark horizontal my-0">
-  <div class="card-footer p-3">
-    <p class="mb-0"><span class="text-success text-sm font-weight-bolder"><br></p>
-  </div>
-</div>
-
-        <div class="card  mb-2">
-  <div class="card-header p-3 pt-2">
-    <div class="icon icon-lg icon-shape bg-gradient-primary shadow-primary shadow text-center border-radius-xl mt-n4 position-absolute">
-      <i class="material-icons opacity-10">leaderboard</i>
-    </div>
-    <div class="text-end pt-1">
-      <p class="text-sm mb-0 text-capitalize">Today's Users</p>
-      <h4 class="mb-0">2,300</h4>
-    </div>
-  </div>
-
-  <hr class="dark horizontal my-0">
-  <div class="card-footer p-3">
-    <p class="mb-0"><span class="text-success text-sm font-weight-bolder">+3% </span>than last month</p>
-  </div>
-</div>
-
-      </div>
-      <div class="col-lg-5 col-sm-5 mt-sm-0 mt-4">
-        <div class="card  mb-2">
-  <div class="card-header p-3 pt-2 bg-transparent">
-    <div class="icon icon-lg icon-shape bg-gradient-success shadow-success text-center border-radius-xl mt-n4 position-absolute">
-      <i class="material-icons opacity-10">local_mall</i>
-    </div>
-    <div class="text-end pt-1">
-      <p class="text-sm mb-0 text-capitalize ">Products</p>
-      <?php
-        $Pro = getalldata("product");
-        if($Total_Pro_Row = mysqli_num_rows($Pro))
-        {
-          ?>
-          <h4 class="mb-0"><?php echo $Total_Pro_Row ?></h4>
-          <?php
-        }
-        else
-        {
-          echo "error";
-        }
-      ?>
-    </div>
-  </div>
-
-  <hr class="dark horizontal my-0">
-  <div class="card-footer p-3">
-    <p class="mb-0"><span class="text-success text-sm font-weight-bolder"><br></p>
-  </div>
-  </hr>
-</div>
-
-        <div class="card ">
-  <div class="card-header p-3 pt-2 bg-transparent">
-    <div class="icon icon-lg icon-shape bg-gradient-info shadow-info text-center border-radius-xl mt-n4 position-absolute">
-      <i class="material-icons opacity-10">person_add</i>
-    </div>
-    <div class="text-end pt-1">
-      <p class="text-sm mb-0 text-capitalize ">Followers</p>
-      <h4 class="mb-0 ">+91</h4>
-    </div>
-  </div>
-
-  <hr class="horizontal my-0 dark">
-  <div class="card-footer p-3">
-    <p class="mb-0 ">Just updated</p>
-  </div>
-</div>
-
-      </div>
-    </div>
-
-    <div class="row mt-4">
-      <div class="col-10">
-        <div class="card mb-4 ">
-  <div class="d-flex">
-    <div class="icon icon-shape icon-lg bg-gradient-success shadow text-center border-radius-xl mt-n3 ms-4">
-      <i class="material-icons opacity-10" aria-hidden="true">language</i>
-    </div>
-    <h6 class="mt-3 mb-2 ms-3 ">Sales by Country</h6>
-  </div>
-  <div class="card-body p-3">
-    <div class="row">
-      <div class="col-lg-6 col-md-7">
-        <div class="table-responsive">
-          <table class="table align-items-center ">
-            <tbody>
-              <tr>
-                <td class="w-30">
-                  <div class="d-flex px-2 py-1 align-items-center">
-                    <div>
-                      <img src="./assets/img/icons/flags/US.png" alt="Country flag">
-                    </div>
-                    <div class="ms-4">
-                      <p class="text-xs font-weight-bold mb-0 ">Country:</p>
-                      <h6 class="text-sm font-weight-normal mb-0 ">United States</h6>
-                    </div>
-                  </div>
-                </td>
-                <td>
-                  <div class="text-center">
-                    <p class="text-xs font-weight-bold mb-0 ">Sales:</p>
-                    <h6 class="text-sm font-weight-normal mb-0 ">2500</h6>
-                  </div>
-                </td>
-                <td>
-                  <div class="text-center">
-                    <p class="text-xs font-weight-bold mb-0 ">Value:</p>
-                    <h6 class="text-sm font-weight-normal mb-0 ">$230,900</h6>
-                  </div>
-                </td>
-                <td class="align-middle text-sm">
-                  <div class="col text-center">
-                    <p class="text-xs font-weight-bold mb-0 ">Bounce:</p>
-                    <h6 class="text-sm font-weight-normal mb-0 ">29.9%</h6>
-                  </div>
-                </td>
-              </tr>
-
-              <tr>
-                <td class="w-30">
-                  <div class="d-flex px-2 py-1 align-items-center">
-                    <div>
-                      <img src="./assets/img/icons/flags/DE.png" alt="Country flag">
-                    </div>
-                    <div class="ms-4">
-                      <p class="text-xs font-weight-bold mb-0 ">Country:</p>
-                      <h6 class="text-sm font-weight-normal mb-0 ">Germany</h6>
-                    </div>
-                  </div>
-                </td>
-                <td>
-                  <div class="text-center">
-                    <p class="text-xs font-weight-bold mb-0 ">Sales:</p>
-                    <h6 class="text-sm font-weight-normal mb-0 ">3.900</h6>
-                  </div>
-                </td>
-                <td>
-                  <div class="text-center">
-                    <p class="text-xs font-weight-bold mb-0 ">Value:</p>
-                    <h6 class="text-sm font-weight-normal mb-0 ">$440,000</h6>
-                  </div>
-                </td>
-                <td class="align-middle text-sm">
-                  <div class="col text-center">
-                    <p class="text-xs font-weight-bold mb-0 ">Bounce:</p>
-                    <h6 class="text-sm font-weight-normal mb-0 ">40.22%</h6>
-                  </div>
-                </td>
-              </tr>
-
-              <tr>
-                <td class="w-30">
-                  <div class="d-flex px-2 py-1 align-items-center">
-                    <div>
-                      <img src="./assets/img/icons/flags/GB.png" alt="Country flag">
-                    </div>
-                    <div class="ms-4">
-                      <p class="text-xs font-weight-bold mb-0 ">Country:</p>
-                      <h6 class="text-sm font-weight-normal mb-0 ">Great Britain</h6>
-                    </div>
-                  </div>
-                </td>
-                <td>
-                  <div class="text-center">
-                    <p class="text-xs font-weight-bold mb-0 ">Sales:</p>
-                    <h6 class="text-sm font-weight-normal mb-0 ">1.400</h6>
-                  </div>
-                </td>
-                <td>
-                  <div class="text-center">
-                    <p class="text-xs font-weight-bold mb-0 ">Value:</p>
-                    <h6 class="text-sm font-weight-normal mb-0 ">$190,700</h6>
-                  </div>
-                </td>
-                <td class="align-middle text-sm">
-                  <div class="col text-center">
-                    <p class="text-xs font-weight-bold mb-0 ">Bounce:</p>
-                    <h6 class="text-sm font-weight-normal mb-0 ">23.44%</h6>
-                  </div>
-                </td>
-              </tr>
-
-              <tr>
-                <td class="w-30">
-                  <div class="d-flex px-2 py-1 align-items-center">
-                    <div>
-                      <img src="./assets/img/icons/flags/BR.png" alt="Country flag">
-                    </div>
-                    <div class="ms-4">
-                      <p class="text-xs font-weight-bold mb-0 ">Country:</p>
-                      <h6 class="text-sm font-weight-normal mb-0 ">Brasil</h6>
-                    </div>
-                  </div>
-                </td>
-                <td>
-                  <div class="text-center">
-                    <p class="text-xs font-weight-bold mb-0 ">Sales:</p>
-                    <h6 class="text-sm font-weight-normal mb-0 ">562</h6>
-                  </div>
-                </td>
-                <td>
-                  <div class="text-center">
-                    <p class="text-xs font-weight-bold mb-0 ">Value:</p>
-                    <h6 class="text-sm font-weight-normal mb-0 ">$143,960</h6>
-                  </div>
-                </td>
-                <td class="align-middle text-sm">
-                  <div class="col text-center">
-                    <p class="text-xs font-weight-bold mb-0 ">Bounce:</p>
-                    <h6 class="text-sm font-weight-normal mb-0 ">32.14%</h6>
-                  </div>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-      <div class="col-lg-6 col-md-5">
-        <div id="map" class="mt-0 mt-lg-n4"></div>
-      </div>
-    </div>
-  </div>
-</div>
-
-      </div>
-    </div>
-  </div>
-</div>
-
-<div class="row mt-4">
-  <div class="col-lg-5 mb-lg-0 mb-4">
-    <div class="card z-index-2 mt-4">
-  <div class="card-body mt-n5 px-3">
-    <div class="bg-gradient-dark shadow-dark border-radius-lg py-3 pe-1 mb-3">
-      <div class="chart">
-        <canvas id="chart-bars" class="chart-canvas" height="170"></canvas>
-      </div>
-    </div>
-    <h6 class="ms-2 mt-4 mb-0"> Active Users </h6>
-    <p class="text-sm ms-2"> (<span class="font-weight-bolder">+11%</span>) than last week </p>
-    <div class="container border-radius-lg">
-      <div class="row">
-        <div class="col-3 py-3 ps-0">
-          <div class="d-flex mb-2">
-            <div class="icon icon-shape icon-xxs shadow border-radius-sm bg-gradient-primary text-center me-2 d-flex align-items-center justify-content-center">
-              <i class="material-icons opacity-10">groups</i>
             </div>
-            <p class="text-xs my-auto font-weight-bold">Users</p>
-          </div>
-          <h4 class="font-weight-bolder">42K</h4>
-          <div class="progress w-75">
-            <div class="progress-bar bg-dark w-60" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"></div>
-          </div>
-        </div>
-        <div class="col-3 py-3 ps-0">
-          <div class="d-flex mb-2">
-            <div class="icon icon-shape icon-xxs shadow border-radius-sm bg-gradient-info text-center me-2 d-flex align-items-center justify-content-center">
-              <i class="material-icons opacity-10">ads_click</i>
+            <div class="card-footer p-1">
+              <form action="" class="form-submit">
+                <div class="row p-2">
+                  <div class="col-md-6 py-1 pl-4">
+                    <b>Quantity : </b>
+                  </div>
+                  <div class="col-md-6">
+                    <input type="number" class="form-control pqty" value="<?= $row['product_qty'] ?>">
+                  </div>
+                </div>
+                <input type="hidden" class="pid" value="<?= $row['id'] ?>">
+                <input type="hidden" class="pname" value="<?= $row['product_name'] ?>">
+                <input type="hidden" class="pprice" value="<?= $row['product_price'] ?>">
+                <input type="hidden" class="pimage" value="<?= $row['product_image'] ?>">
+                <input type="hidden" class="pcode" value="<?= $row['product_code'] ?>">
+                <button class="btn btn-info btn-block addItemBtn"><i class="fas fa-cart-plus"></i>&nbsp;&nbsp;Add to
+                  cart</button>
+              </form>
             </div>
-            <p class="text-xs mt-1 mb-0 font-weight-bold">Clicks</p>
-          </div>
-          <h4 class="font-weight-bolder">1.7m</h4>
-          <div class="progress w-75">
-            <div class="progress-bar bg-dark w-90" role="progressbar" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100"></div>
-          </div>
-        </div>
-        <div class="col-3 py-3 ps-0">
-          <div class="d-flex mb-2">
-            <div class="icon icon-shape icon-xxs shadow border-radius-sm bg-gradient-warning text-center me-2 d-flex align-items-center justify-content-center">
-              <i class="material-icons opacity-10">receipt</i>
-            </div>
-            <p class="text-xs mt-1 mb-0 font-weight-bold">Sales</p>
-          </div>
-          <h4 class="font-weight-bolder">399$</h4>
-          <div class="progress w-75">
-            <div class="progress-bar bg-dark w-30" role="progressbar" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100"></div>
-          </div>
-        </div>
-        <div class="col-3 py-3 ps-0">
-          <div class="d-flex mb-2">
-            <div class="icon icon-shape icon-xxs shadow border-radius-sm bg-gradient-danger text-center me-2 d-flex align-items-center justify-content-center">
-              <i class="material-icons opacity-10">category</i>
-            </div>
-            <p class="text-xs mt-1 mb-0 font-weight-bold">Items</p>
-          </div>
-          <h4 class="font-weight-bolder">74</h4>
-          <div class="progress w-75">
-            <div class="progress-bar bg-dark w-50" role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
           </div>
         </div>
       </div>
+      <?php endwhile; ?>
     </div>
   </div>
-</div>
+  <!-- Displaying Products End -->
 
-  </div>
-  <div class="col-lg-7">
-    <div class="card z-index-2">
-  <div class="card-header pb-0">
-    <h6>Sales overview</h6>
-    <p class="text-sm">
-      <i class="fa fa-arrow-up text-success"></i>
-      <span class="font-weight-bold">4% more</span> in 2021
-    </p>
-  </div>
-  <div class="card-body p-3">
-    <div class="chart">
-      <canvas id="chart-line" class="chart-canvas" height="300"></canvas>
-    </div>
-  </div>
-</div>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js'></script>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/js/bootstrap.min.js'></script>
 
-  </div>
-</div>           
+  <script type="text/javascript">
+  $(document).ready(function() {
 
+    // Send product details in the server
+    $(".addItemBtn").click(function(e) {
+      e.preventDefault();
+      var $form = $(this).closest(".form-submit");
+      var pid = $form.find(".pid").val();
+      var pname = $form.find(".pname").val();
+      var pprice = $form.find(".pprice").val();
+      var pimage = $form.find(".pimage").val();
+      var pcode = $form.find(".pcode").val();
 
-<?php 
-include('includes/footer.php');
-include('includes/scripts.php');
-?>
+      var pqty = $form.find(".pqty").val();
+
+      $.ajax({
+        url: 'action.php',
+        method: 'post',
+        data: {
+          pid: pid,
+          pname: pname,
+          pprice: pprice,
+          pqty: pqty,
+          pimage: pimage,
+          pcode: pcode
+        },
+        success: function(response) {
+          $("#message").html(response);
+          window.scrollTo(0, 0);
+          load_cart_item_number();
+        }
+      });
+    });
+
+    // Load total no.of items added in the cart and display in the navbar
+    load_cart_item_number();
+
+    function load_cart_item_number() {
+      $.ajax({
+        url: 'action.php',
+        method: 'get',
+        data: {
+          cartItem: "cart_item"
+        },
+        success: function(response) {
+          $("#cart-item").html(response);
+        }
+      });
+    }
+  });
+  </script>
+</body>
+
+</html>
